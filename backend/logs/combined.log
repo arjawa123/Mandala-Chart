@@ -1,0 +1,44 @@
+[2026-03-02 13:32:40] INFO: Mandala Chart backend running on http://localhost:3001
+[2026-03-02 14:27:21] INFO: Mandala Chart backend running on http://localhost:3001
+[2026-03-02 19:00:23] INFO: Mandala Chart backend running on http://localhost:3001
+[2026-03-02 19:00:54] INFO: POST /api/projects
+[2026-03-02 19:01:41] INFO: PUT /api/projects/03d831e0-85e3-45e1-be4e-3743f2454063
+[2026-03-02 19:02:47] INFO: POST /api/ai/generate-pillars
+[2026-03-02 19:02:47] INFO: AI generate-pillars: "financially stable and live happily"
+[2026-03-02 19:02:47] ERROR: AI generate-pillars error: 401 {"error":{"message":"Invalid API Key","type":"invalid_request_error","code":"invalid_api_key"}}
+[2026-03-02 19:03:01] INFO: PUT /api/projects/03d831e0-85e3-45e1-be4e-3743f2454063
+[2026-03-02 19:05:07] INFO: Mandala Chart backend running on http://localhost:3001
+[2026-03-02 19:05:19] INFO: POST /api/ai/generate-pillars
+[2026-03-02 19:05:19] INFO: AI generate-pillars: "financially stable and live happily"
+[2026-03-02 19:05:36] INFO: PUT /api/projects/03d831e0-85e3-45e1-be4e-3743f2454063
+[2026-03-02 19:05:43] INFO: POST /api/ai/breakdown
+[2026-03-02 19:05:43] INFO: AI breakdown: "Develop Financial Literacy and Planning"
+[2026-03-02 19:06:01] INFO: PUT /api/projects/03d831e0-85e3-45e1-be4e-3743f2454063
+[2026-03-02 19:06:25] INFO: PUT /api/projects/03d831e0-85e3-45e1-be4e-3743f2454063
+[2026-03-02 19:20:15] INFO: Mandala Chart backend running on http://localhost:3001
+[2026-03-02 19:20:20] INFO: POST /api/projects
+[2026-03-02 19:24:14] INFO: POST /api/projects
+[2026-03-02 19:24:35] INFO: POST /api/projects
+[2026-03-02 19:25:20] INFO: POST /api/projects
+[2026-03-02 19:25:42] INFO: GET /api/projects
+[2026-03-02 19:25:44] INFO: GET /api/projects/26cee403-6b66-4c03-ad33-5298fa9069e2
+[2026-03-02 19:26:58] INFO: GET /api/health
+[2026-03-02 19:26:59] INFO: GET /favicon.ico
+[2026-03-02 19:27:08] INFO: POST /api/projects
+[2026-03-02 19:28:08] INFO: GET /api/health
+[2026-03-02 19:37:07] INFO: POST /api/projects
+[2026-03-02 19:37:10] INFO: GET /api/projects
+[2026-03-02 19:37:21] INFO: PUT /api/projects/b239aee0-c96f-42b2-8a6f-468cd2933979
+[2026-03-02 19:37:39] INFO: POST /api/ai/generate-pillars
+[2026-03-02 19:37:39] INFO: AI generate-pillars: "Jadi presiden"
+[2026-03-02 19:37:52] INFO: POST /api/ai/breakdown
+[2026-03-02 19:37:52] INFO: AI breakdown: "Mengembangkan Visi dan Misi yang Jelas"
+[2026-03-02 19:40:24] INFO: PUT /api/projects/26cee403-6b66-4c03-ad33-5298fa9069e2
+[2026-03-02 20:14:58] INFO: Mandala Chart backend running on http://localhost:3001
+[2026-03-02 20:16:00] INFO: POST /api/ai/make-smart
+[2026-03-02 20:16:00] INFO: AI make-smart: "Mengembangkan Jaringan dan Relasi"
+[2026-03-02 20:16:24] INFO: PUT /api/projects/dde695ff-67f8-4905-a141-ba5f69e26df6
+[2026-03-02 20:16:58] INFO: PUT /api/projects/dde695ff-67f8-4905-a141-ba5f69e26df6
+[2026-03-02 20:17:20] INFO: PUT /api/projects/dde695ff-67f8-4905-a141-ba5f69e26df6
+[2026-03-02 20:17:59] INFO: PUT /api/projects/dde695ff-67f8-4905-a141-ba5f69e26df6
+[2026-03-02 20:19:35] INFO: PUT /api/projects/dde695ff-67f8-4905-a141-ba5f69e26df6

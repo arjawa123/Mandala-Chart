@@ -393,57 +393,92 @@ aiPanel.addEventListener('pointerup', (e) => {
     isDragging = false;
     aiPanel.releasePointerCapture(e.pointerId);
 
-    // Kembalikan transisi native CSS
-    aiPanel.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
-
     const dy = e.clientY - startY;
 
-    // Gunakan logika arah usapan (swipe)
+    // Tentukan aksi bedasarkan arah kecepatan usap
+    let isCollapsing = false;
     if (dy > 40) {
-        // Usap ke bawah -> collapse
-        aiPanel.classList.add('collapsed');
-        aiPanel.classList.remove('hidden-bottom');
+        isCollapsing = true; // Usap bawah -> kempes
     } else if (dy < -40) {
-        // Usap ke atas -> expand
-        aiPanel.classList.remove('collapsed');
-        aiPanel.classList.remove('hidden-bottom');
+        isCollapsing = false; // Usap atas -> mekar
     } else {
-        // Kembali ke tempat semula sesuai class sebelumnya
+        isCollapsing = currentTranslateY > panelHeight / 2;
     }
 
-    // Hapus inline transform styling agar sistem class CSS ambil alih
+    // Posisi target: 0 jika penuh, (tinggi panel - tinggi header) jika kempes
+    const targetY = isCollapsing ? (panelHeight - 58) : 0;
+
+    // Animasikan ke target lokasi via inline style (Dijamin 100% menggunakan animasi)
+    aiPanel.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)';
+
+    // Sinkronisasi memori browser
+    void aiPanel.offsetHeight;
+
+    // Terapkan translasi
+    aiPanel.style.transform = `translateY(${targetY}px)`;
+
+    // Setelah animasi selesai, bersihkan inline style dan kembalikan wewenang pada CSS Class
     setTimeout(() => {
-        aiPanel.style.transform = '';
+        if (isDragging) return; // Batal jika di tengah jalan disentuh jari lagi
+
+        if (isCollapsing) {
+            aiPanel.classList.add('collapsed');
+            aiPanel.classList.remove('hidden-bottom');
+        } else {
+            aiPanel.classList.remove('collapsed');
+            aiPanel.classList.remove('hidden-bottom');
+        }
+
+        // Hapus inline agar patuh dan selaras natural ke class CSS
         aiPanel.style.transition = '';
-    }, 10);
+        aiPanel.style.transform = '';
+    }, 400);
+});
+
+// Logic untuk dropdown menu baru
+const btnMore = document.getElementById('btn-more');
+const moreMenu = document.getElementById('more-menu');
+
+btnMore.addEventListener('click', (e) => {
+    e.stopPropagation();
+    moreMenu.classList.toggle('hidden');
+});
+
+// Tutup semua menu jika klik di luar
+window.addEventListener('click', () => {
+    moreMenu.classList.add('hidden');
 });
 
 btnAiToggle.addEventListener('click', () => {
     isAiPanelOpen = !isAiPanelOpen;
     btnAiToggle.classList.toggle('active', isAiPanelOpen);
 
+    aiPanel.classList.add('transitioning');
+
     if (isMobile()) {
         if (!isAiPanelOpen) {
-            // Hide fully (disappear from screen bottom)
             aiPanel.classList.add('hidden-bottom');
             aiPanel.classList.remove('collapsed');
         } else {
-            // Expand fully
             aiPanel.classList.remove('hidden-bottom');
             aiPanel.classList.remove('collapsed');
         }
     } else {
-        // Desktop default logic
         aiPanel.classList.toggle('collapsed', !isAiPanelOpen);
     }
+
+    setTimeout(() => {
+        aiPanel.classList.remove('transitioning');
+    }, 300);
 });
 
-// Set default state based on device
+// Set default state based on device & UI logic
 if (isMobile()) {
     aiPanel.classList.add('hidden-bottom');
     btnAiToggle.classList.remove('active');
 } else {
     btnAiToggle.classList.add('active');
+    aiPanel.classList.remove('collapsed');
 }
 
 function updateAiContext(label) {
@@ -611,10 +646,7 @@ function showAiResult(title, input, output, onApply, customHtml = null) {
 }
 
 // ─── Export ───────────────────────────────────────────────
-const exportBtn = document.getElementById('btn-export');
-const exportMenu = document.getElementById('export-menu');
-exportBtn.addEventListener('click', (e) => { e.stopPropagation(); exportMenu.classList.toggle('hidden'); });
-document.addEventListener('click', () => exportMenu.classList.add('hidden'));
+// (Didelegasikan ke more-menu)
 
 async function exportAsPNG() {
     showToast('Membuat PNG...', 'info');
@@ -662,7 +694,7 @@ async function exportAsPDF() {
 document.querySelectorAll('.export-opt').forEach(btn => {
     btn.addEventListener('click', async (e) => {
         const fmt = e.currentTarget.dataset.format;
-        exportMenu.classList.add('hidden');
+        moreMenu.classList.add('hidden'); // Close the parent more menu
         try {
             if (fmt === 'png') { await exportAsPNG(); }
             else if (fmt === 'pdf') { await exportAsPDF(); }

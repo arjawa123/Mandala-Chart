@@ -301,7 +301,7 @@ body {
   position: relative;
 }
 
-.export-menu {
+.dropdown-menu {
   position: absolute;
   right: 0;
   top: calc(100% + 6px);
@@ -310,20 +310,23 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   z-index: 100;
-  min-width: 140px;
+  min-width: 160px;
   overflow: hidden;
+  padding: 4px 0;
 }
 
-.export-menu.hidden {
+.dropdown-menu.hidden {
   display: none;
 }
 
-.export-opt {
-  display: block;
+.dropdown-opt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
   text-align: left;
   padding: 8px 14px;
-  font-size: 12px;
+  font-size: 13px;
   font-family: inherit;
   color: var(--text-secondary);
   background: transparent;
@@ -332,9 +335,24 @@ body {
   transition: background .1s, color .1s;
 }
 
-.export-opt:hover {
+.dropdown-opt:hover {
   background: var(--bg);
-  color: var(--text-primary);
+  color: var(--accent-main);
+}
+
+.dropdown-sub-title {
+  padding: 8px 14px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.divider-h {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
 }
 
 /* ─── App Body ───────────────────────────────────────── */
@@ -1156,9 +1174,21 @@ body {
   }
 
   .hbtn span,
-  .hbtn-primary span {
+  .hbtn-primary span,
+  .hbtn-ai span {
     display: none;
-    /* if you had text spans, hide them on mobile. But we don't, we just let it scroll */
+  }
+
+  .hbtn,
+  .hbtn-primary,
+  .hbtn-ai {
+    padding: 6px;
+    min-width: 32px;
+    justify-content: center;
+  }
+
+  #btn-zoom-reset {
+    display: none;
   }
 
   .template-grid {

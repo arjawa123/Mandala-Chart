@@ -1097,16 +1097,28 @@ body {
     width: 100%;
     height: 80vh;
     /* Fixed height! */
-    transform: translateY(100%);
+    transform: translateY(0);
+    /* Default fully expanded */
     border-left: none;
     border-top: 1px solid var(--border);
     border-radius: 16px 16px 0 0;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
     z-index: 100;
-    /* transition mostly strictly handled by JS during drag, but add fallback for toggle */
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     will-change: transform;
     touch-action: none;
+  }
+
+  #ai-panel.collapsed {
+    width: 100%;
+    /* Override desktop collapsed */
+    transform: translateY(calc(100% - 58px));
+    /* Show only header, assuming header is ~50px */
+  }
+
+  #ai-panel.hidden-bottom {
+    transform: translateY(100%) !important;
+    /* Fully hidden completely */
   }
 
   /* Add drag handle indicating it can be pulled */
@@ -1136,10 +1148,6 @@ body {
 
   #ai-panel.transitioning {
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-
-  #ai-panel:not(.collapsed) {
-    transform: translateY(0);
   }
 
   .hbtn span,

@@ -92,3 +92,10 @@
 [2026-03-02 21:44:59] INFO: PUT /api/projects/3af1b530-5d16-4b72-9bc6-b8ee63db12a7
 [2026-03-02 21:45:02] INFO: GET /api/projects
 [2026-03-02 21:45:07] INFO: PUT /api/projects/3af1b530-5d16-4b72-9bc6-b8ee63db12a7
+[2026-03-02 22:37:32] INFO: Mandala Chart backend running on http://localhost:3001
+[2026-03-02 22:37:53] INFO: POST /api/ai/breakdown
+[2026-03-02 22:37:53] INFO: AI breakdown: "Mengembangkan Kemampuan Psikis"
+[2026-03-02 22:38:48] INFO: POST /api/ai/breakdown
+[2026-03-02 22:38:48] INFO: AI breakdown: "Menguasai Teknologi Canggih"
+[2026-03-02 22:39:06] INFO: PUT /api/projects/3af1b530-5d16-4b72-9bc6-b8ee63db12a7
+[2026-03-02 22:39:33] INFO: Mandala Chart backend running on http://localhost:3001

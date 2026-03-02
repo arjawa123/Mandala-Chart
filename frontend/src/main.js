@@ -398,16 +398,18 @@ aiPanel.addEventListener('pointerup', (e) => {
     const matrix = new WebKitCSSMatrix(style.transform);
     const finalY = matrix.m41 ? matrix.m42 : 0;
 
-    // Jika ditarik ke bawah lebih dari seperempat, kita drop / sembunyikan secara utuh
+    // Jika ditarik ke bawah lebih dari seperempat, kita jadikan header only (collapsed)
     if (finalY > panelHeight * 0.25) {
-        isAiPanelOpen = false;
+        // Ter-collapse ke bawah layaknya bottom sheet (header still visible)
+        // isAiPanelOpen is STILL true because it's technically still active/on-screen
         aiPanel.classList.add('collapsed');
-        btnAiToggle.classList.remove('active');
+        aiPanel.classList.remove('hidden-bottom');
+
+        // Snap the translateY visually back to 0 so CSS translateY gets used
     } else {
-        // Balikkan seperti dibuka penuh
-        isAiPanelOpen = true;
+        // Balikkan terentang/mengembang penuh
         aiPanel.classList.remove('collapsed');
-        btnAiToggle.classList.add('active');
+        aiPanel.classList.remove('hidden-bottom');
     }
 
     // Hapus inline transform styling agar sistem class CSS ambil alih lagi
@@ -419,8 +421,21 @@ aiPanel.addEventListener('pointerup', (e) => {
 
 btnAiToggle.addEventListener('click', () => {
     isAiPanelOpen = !isAiPanelOpen;
-    aiPanel.classList.toggle('collapsed', !isAiPanelOpen);
     btnAiToggle.classList.toggle('active', isAiPanelOpen);
+
+    if (isMobile()) {
+        if (!isAiPanelOpen) {
+            // Hide fully (disappear from screen bottom)
+            aiPanel.classList.add('hidden-bottom');
+        } else {
+            // Expand fully
+            aiPanel.classList.remove('hidden-bottom');
+            aiPanel.classList.remove('collapsed');
+        }
+    } else {
+        // Desktop default logic
+        aiPanel.classList.toggle('collapsed', !isAiPanelOpen);
+    }
 });
 btnAiToggle.classList.add('active');
 

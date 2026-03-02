@@ -19,7 +19,7 @@ const history = new History();
 let currentProjectId = null;
 let selectedCellId = null;
 let selectedBlkIdx = null;
-let isAiPanelOpen = true;
+let isAiPanelOpen = window.innerWidth > 768; // Default off on mobile
 let isFocusMode = false;
 
 // ─── Zoom / Pan ───────────────────────────────────────────
@@ -379,8 +379,10 @@ aiPanel.addEventListener('pointermove', (e) => {
     const dy = e.clientY - startY;
     let targetY = currentTranslateY + dy;
 
-    // Cegah drag sampai lepas / terbang ke atas layar, mentok ujung atas (0)
+    // Cegat targetY agar tidak melewati batas atas (0) dan batas bawah (collapse = tinggi - 58px)
+    const maxY = panelHeight - 58;
     if (targetY < 0) targetY = 0;
+    if (targetY > maxY) targetY = maxY;
 
     // Gunakan transform GPU rendering agar pergerakan sehalus mentega
     aiPanel.style.transform = `translateY(${targetY}px)`;
@@ -394,25 +396,22 @@ aiPanel.addEventListener('pointerup', (e) => {
     // Kembalikan transisi native CSS
     aiPanel.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
 
-    const style = window.getComputedStyle(aiPanel);
-    const matrix = new WebKitCSSMatrix(style.transform);
-    const finalY = matrix.m41 ? matrix.m42 : 0;
+    const dy = e.clientY - startY;
 
-    // Jika ditarik ke bawah lebih dari seperempat, kita jadikan header only (collapsed)
-    if (finalY > panelHeight * 0.25) {
-        // Ter-collapse ke bawah layaknya bottom sheet (header still visible)
-        // isAiPanelOpen is STILL true because it's technically still active/on-screen
+    // Gunakan logika arah usapan (swipe)
+    if (dy > 40) {
+        // Usap ke bawah -> collapse
         aiPanel.classList.add('collapsed');
         aiPanel.classList.remove('hidden-bottom');
-
-        // Snap the translateY visually back to 0 so CSS translateY gets used
-    } else {
-        // Balikkan terentang/mengembang penuh
+    } else if (dy < -40) {
+        // Usap ke atas -> expand
         aiPanel.classList.remove('collapsed');
         aiPanel.classList.remove('hidden-bottom');
+    } else {
+        // Kembali ke tempat semula sesuai class sebelumnya
     }
 
-    // Hapus inline transform styling agar sistem class CSS ambil alih lagi
+    // Hapus inline transform styling agar sistem class CSS ambil alih
     setTimeout(() => {
         aiPanel.style.transform = '';
         aiPanel.style.transition = '';
@@ -427,6 +426,7 @@ btnAiToggle.addEventListener('click', () => {
         if (!isAiPanelOpen) {
             // Hide fully (disappear from screen bottom)
             aiPanel.classList.add('hidden-bottom');
+            aiPanel.classList.remove('collapsed');
         } else {
             // Expand fully
             aiPanel.classList.remove('hidden-bottom');
@@ -437,7 +437,14 @@ btnAiToggle.addEventListener('click', () => {
         aiPanel.classList.toggle('collapsed', !isAiPanelOpen);
     }
 });
-btnAiToggle.classList.add('active');
+
+// Set default state based on device
+if (isMobile()) {
+    aiPanel.classList.add('hidden-bottom');
+    btnAiToggle.classList.remove('active');
+} else {
+    btnAiToggle.classList.add('active');
+}
 
 function updateAiContext(label) {
     document.getElementById('ai-context-label').textContent = label ? (label.length > 32 ? label.slice(0, 30) + '...' : label) : '—';

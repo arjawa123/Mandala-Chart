@@ -1072,13 +1072,18 @@ body {
   }
 
   .breadcrumb {
-    display: none;
-    /* Hide breadcrumb on very small screens to save space */
+    /* Munculkan kembali navigasi breadcrumb di bawah title mobile */
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 8px;
   }
 
   .header-right {
     width: 100%;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    /* Hilangkan overflow: auto yang memotong render Absolute menu dropdown Export */
+    overflow: visible;
     padding-bottom: 4px;
     justify-content: flex-start;
   }

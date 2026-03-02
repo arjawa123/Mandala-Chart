@@ -294,10 +294,84 @@ document.getElementById('template-modal-close').addEventListener('click', () => 
 // ─── AI Panel ─────────────────────────────────────────────
 const aiPanel = document.getElementById('ai-panel');
 const btnAiToggle = document.getElementById('btn-ai-toggle');
+
+// Dragging Logic for Mobile Bottom Sheet
+let startY = 0;
+let startHeight = 0;
+let isDragging = false;
+
+// Determine if we are on a mobile sized screen
+const isMobile = () => window.innerWidth <= 768;
+
+aiPanel.addEventListener('pointerdown', (e) => {
+    // Only drag from the header/drag handle in mobile
+    if (!isMobile() || !e.target.closest('.ai-panel-header')) return;
+    isDragging = true;
+    startY = e.clientY;
+    startHeight = aiPanel.offsetHeight;
+
+    aiPanel.classList.remove('transitioning');
+    aiPanel.setPointerCapture(e.pointerId);
+});
+
+aiPanel.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+
+    // Calculate new height (inverse of Y movement because bottom is fixed)
+    const dy = e.clientY - startY;
+    let newHeight = startHeight - dy;
+
+    // Limits
+    const minHeight = 60; // Just header
+    const maxHeight = window.innerHeight * 0.9;
+
+    if (newHeight < minHeight) newHeight = minHeight;
+    if (newHeight > maxHeight) newHeight = maxHeight;
+
+    aiPanel.style.setProperty('--panel-height', `${newHeight}px`);
+});
+
+aiPanel.addEventListener('pointerup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    aiPanel.releasePointerCapture(e.pointerId);
+
+    const currentHeight = aiPanel.offsetHeight;
+    const threshClose = 120; // threshold to strictly close
+
+    aiPanel.classList.add('transitioning');
+
+    if (currentHeight < threshClose) {
+        // Snap to closed/collapsed
+        isAiPanelOpen = false;
+        aiPanel.classList.add('collapsed');
+        btnAiToggle.classList.remove('active');
+        // Reset height property so CSS handles the collapsed state correctly
+        aiPanel.style.removeProperty('--panel-height');
+    } else {
+        // Stay open, ensure height is locked
+        isAiPanelOpen = true;
+        aiPanel.classList.remove('collapsed');
+        btnAiToggle.classList.add('active');
+    }
+
+    // Remove transition class after animation completes to avoid conflict with further dragging
+    setTimeout(() => aiPanel.classList.remove('transitioning'), 300);
+});
+
 btnAiToggle.addEventListener('click', () => {
+    aiPanel.classList.add('transitioning');
     isAiPanelOpen = !isAiPanelOpen;
     aiPanel.classList.toggle('collapsed', !isAiPanelOpen);
     btnAiToggle.classList.toggle('active', isAiPanelOpen);
+
+    if (isAiPanelOpen && isMobile()) {
+        aiPanel.style.setProperty('--panel-height', '400px'); // Default height when opened via button
+    } else {
+        aiPanel.style.removeProperty('--panel-height');
+    }
+
+    setTimeout(() => aiPanel.classList.remove('transitioning'), 300);
 });
 btnAiToggle.classList.add('active');
 

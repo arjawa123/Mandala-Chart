@@ -1,5 +1,5 @@
 /**
- * ai.service.js - Groq AI service with lowdb logging
+ * ai.service.js - Groq AI service with PostgreSQL logging
  */
 
 const Groq = require('groq-sdk');
@@ -10,19 +10,12 @@ const MODEL = 'llama-3.3-70b-versatile';
 
 const SYSTEM_PROMPT = `You are a professional strategic planning assistant specializing in goal decomposition and structured thinking. You help users create clear, actionable, and measurable goals using frameworks like SMART goals and Mandala Charts. Always respond in the same language the user uses. Return responses as clean JSON only, without any explanation or markdown code blocks.`;
 
-function logUsage(projectId, action, input, output, tokensUsed, durationMs) {
+async function logUsage(projectId, action, input, output, tokensUsed, durationMs) {
     try {
-        const log = {
-            id: Date.now(),
-            project_id: projectId || null,
-            action,
-            input: (input || '').substring(0, 500),
-            output: (output || '').substring(0, 1000),
-            tokens_used: tokensUsed || 0,
-            duration_ms: durationMs || 0,
-            created_at: new Date().toISOString()
-        };
-        db.get('ai_logs').push(log).write();
+        await db.query(
+            'INSERT INTO ai_logs (project_id, action, input, output, tokens_used, duration_ms) VALUES ($1, $2, $3, $4, $5, $6)',
+            [projectId || null, action, (input || '').substring(0, 500), (output || '').substring(0, 1000), tokensUsed || 0, durationMs || 0]
+        );
     } catch (e) {
         console.error('Failed to log AI usage:', e.message);
     }
@@ -45,6 +38,7 @@ async function callGroq(userPrompt, projectId, action) {
         const tokens = completion.usage?.total_tokens || 0;
         const duration = Date.now() - start;
 
+        // Fire and forget logging
         logUsage(projectId, action, userPrompt, content, tokens, duration);
         return { content, tokens };
     } catch (err) {
@@ -87,12 +81,9 @@ const AIService = {
         return parseJSON(content);
     },
 
-    getHistory(limit = 50) {
-        return db.get('ai_logs')
-            .sortBy('created_at')
-            .reverse()
-            .take(limit)
-            .value();
+    async getHistory(limit = 50) {
+        const result = await db.query('SELECT * FROM ai_logs ORDER BY created_at DESC LIMIT $1', [limit]);
+        return result.rows;
     }
 };
 

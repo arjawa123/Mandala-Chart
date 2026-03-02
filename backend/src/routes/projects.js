@@ -3,9 +3,9 @@ const router = express.Router();
 const ProjectService = require('../services/project.service');
 
 // GET /api/projects - List all
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const projects = ProjectService.getAll();
+        const projects = await ProjectService.getAll();
         res.json({ projects });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -13,10 +13,10 @@ router.get('/', (req, res) => {
 });
 
 // POST /api/projects - Create new
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { name, data } = req.body;
-        const project = ProjectService.create(name, data);
+        const project = await ProjectService.create(name, data);
         res.status(201).json({ project });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -24,9 +24,9 @@ router.post('/', (req, res) => {
 });
 
 // GET /api/projects/:id - Get by ID
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        const project = ProjectService.getById(req.params.id);
+        const project = await ProjectService.getById(req.params.id);
         if (!project) return res.status(404).json({ error: 'Project not found' });
         res.json({ project });
     } catch (err) {
@@ -35,9 +35,9 @@ router.get('/:id', (req, res) => {
 });
 
 // PUT /api/projects/:id - Update
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
-        const project = ProjectService.update(req.params.id, req.body);
+        const project = await ProjectService.update(req.params.id, req.body);
         if (!project) return res.status(404).json({ error: 'Project not found' });
         res.json({ project });
     } catch (err) {
@@ -46,9 +46,9 @@ router.put('/:id', (req, res) => {
 });
 
 // DELETE /api/projects/:id - Delete
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        ProjectService.delete(req.params.id);
+        await ProjectService.delete(req.params.id);
         res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: err.message });

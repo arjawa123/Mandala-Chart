@@ -7740,7 +7740,7 @@
             "children": {
               "0": {
                 "id": "root-0",
-                "label": "Keterampilan Kepemimpinan",
+                "label": "Meningkatkan Kemampuan Teknikal",
                 "parentId": "root",
                 "children": {
                   "0": {
@@ -7795,7 +7795,7 @@
               },
               "1": {
                 "id": "root-1",
-                "label": "Keahlian Teknis",
+                "label": "Mengembangkan Kemampuan Berpikir Kritis",
                 "parentId": "root",
                 "children": {
                   "0": {
@@ -7850,54 +7850,54 @@
               },
               "2": {
                 "id": "root-2",
-                "label": "Jaringan Profesional",
+                "label": "Membangun Jaringan Profesional",
                 "parentId": "root",
                 "children": {
                   "0": {
                     "id": "root-2-0",
-                    "label": "",
+                    "label": "Menghadiri Konferensi Industri",
                     "parentId": "root-2",
                     "children": {}
                   },
                   "1": {
                     "id": "root-2-1",
-                    "label": "",
+                    "label": "Membuat Profil Profesional di Media Sosial",
                     "parentId": "root-2",
                     "children": {}
                   },
                   "2": {
                     "id": "root-2-2",
-                    "label": "",
+                    "label": "Menghubungi Mantan Rekan Kerja untuk Memperbarui Informasi",
                     "parentId": "root-2",
                     "children": {}
                   },
                   "3": {
                     "id": "root-2-3",
-                    "label": "",
+                    "label": "Mengikuti Kelompok Diskusi Online",
                     "parentId": "root-2",
                     "children": {}
                   },
                   "5": {
                     "id": "root-2-5",
-                    "label": "",
+                    "label": "Menghadiri Acara Jaringan Profesional",
                     "parentId": "root-2",
                     "children": {}
                   },
                   "6": {
                     "id": "root-2-6",
-                    "label": "",
+                    "label": "Membuat Daftar Kontak Profesional",
                     "parentId": "root-2",
                     "children": {}
                   },
                   "7": {
                     "id": "root-2-7",
-                    "label": "",
+                    "label": "Mengirimkan Surat Elektronik untuk Memperkenalkan Diri",
                     "parentId": "root-2",
                     "children": {}
                   },
                   "8": {
                     "id": "root-2-8",
-                    "label": "",
+                    "label": "Mengikuti Pelatihan atau Sertifikasi untuk Meningkatkan Kemampuan",
                     "parentId": "root-2",
                     "children": {}
                   }
@@ -7905,7 +7905,7 @@
               },
               "3": {
                 "id": "root-3",
-                "label": "Portofolio & Karya",
+                "label": "Mengembangkan Kemampuan Komunikasi",
                 "parentId": "root",
                 "children": {
                   "0": {
@@ -7960,7 +7960,7 @@
               },
               "5": {
                 "id": "root-5",
-                "label": "Gaji & Tunjangan",
+                "label": "Meningkatkan Kemampuan Manajemen Waktu",
                 "parentId": "root",
                 "children": {
                   "0": {
@@ -8015,7 +8015,7 @@
               },
               "6": {
                 "id": "root-6",
-                "label": "Keseimbangan Kerja-Hidup",
+                "label": "Mengembangkan Kemampuan Pemimpin",
                 "parentId": "root",
                 "children": {
                   "0": {
@@ -8070,7 +8070,7 @@
               },
               "7": {
                 "id": "root-7",
-                "label": "Personal Branding",
+                "label": "Meningkatkan Kesadaran Diri dan Emosi",
                 "parentId": "root",
                 "children": {
                   "0": {
@@ -8125,7 +8125,7 @@
               },
               "8": {
                 "id": "root-8",
-                "label": "Belajar Berkelanjutan",
+                "label": "Mengembangkan Kemampuan Beradaptasi dengan Perubahan",
                 "parentId": "root",
                 "children": {
                   "0": {
@@ -8182,7 +8182,7 @@
           },
           "root-0": {
             "id": "root-0",
-            "label": "Keterampilan Kepemimpinan",
+            "label": "Meningkatkan Kemampuan Teknikal",
             "parentId": "root",
             "children": {
               "0": {
@@ -8285,7 +8285,7 @@
           },
           "root-1": {
             "id": "root-1",
-            "label": "Keahlian Teknis",
+            "label": "Mengembangkan Kemampuan Berpikir Kritis",
             "parentId": "root",
             "children": {
               "0": {
@@ -8388,7 +8388,7 @@
           },
           "root-2": {
             "id": "root-2",
-            "label": "Jaringan Profesional",
+            "label": "Membangun Jaringan Profesional yang terdiri dari 50 orang dalam 6 bulan ke depan dengan menghadiri minimal 2 acara networking per bulan dan melakukan follow-up dengan 10 orang baru setiap bulan",
             "parentId": "root",
             "children": {
               "0": {
@@ -8443,55 +8443,55 @@
           },
           "root-2-0": {
             "id": "root-2-0",
-            "label": "",
+            "label": "Menghadiri Konferensi Industri",
             "parentId": "root-2",
             "children": {}
           },
           "root-2-1": {
             "id": "root-2-1",
-            "label": "",
+            "label": "Membuat Profil Profesional di Media Sosial",
             "parentId": "root-2",
             "children": {}
           },
           "root-2-2": {
             "id": "root-2-2",
-            "label": "",
+            "label": "Menghubungi Mantan Rekan Kerja untuk Memperbarui Informasi",
             "parentId": "root-2",
             "children": {}
           },
           "root-2-3": {
             "id": "root-2-3",
-            "label": "",
+            "label": "Mengikuti Kelompok Diskusi Online",
             "parentId": "root-2",
             "children": {}
           },
           "root-2-5": {
             "id": "root-2-5",
-            "label": "",
+            "label": "Menghadiri Acara Jaringan Profesional",
             "parentId": "root-2",
             "children": {}
           },
           "root-2-6": {
             "id": "root-2-6",
-            "label": "",
+            "label": "Membuat Daftar Kontak Profesional",
             "parentId": "root-2",
             "children": {}
           },
           "root-2-7": {
             "id": "root-2-7",
-            "label": "",
+            "label": "Mengirimkan Surat Elektronik untuk Memperkenalkan Diri",
             "parentId": "root-2",
             "children": {}
           },
           "root-2-8": {
             "id": "root-2-8",
-            "label": "",
+            "label": "Mengikuti Pelatihan atau Sertifikasi untuk Meningkatkan Kemampuan",
             "parentId": "root-2",
             "children": {}
           },
           "root-3": {
             "id": "root-3",
-            "label": "Portofolio & Karya",
+            "label": "Mengembangkan Kemampuan Komunikasi",
             "parentId": "root",
             "children": {
               "0": {
@@ -8594,7 +8594,7 @@
           },
           "root-5": {
             "id": "root-5",
-            "label": "Gaji & Tunjangan",
+            "label": "Meningkatkan Kemampuan Manajemen Waktu",
             "parentId": "root",
             "children": {
               "0": {
@@ -8697,7 +8697,7 @@
           },
           "root-6": {
             "id": "root-6",
-            "label": "Keseimbangan Kerja-Hidup",
+            "label": "Mengembangkan Kemampuan Pemimpin",
             "parentId": "root",
             "children": {
               "0": {
@@ -8800,7 +8800,7 @@
           },
           "root-7": {
             "id": "root-7",
-            "label": "Personal Branding",
+            "label": "Meningkatkan Kesadaran Diri dan Emosi",
             "parentId": "root",
             "children": {
               "0": {
@@ -8903,7 +8903,7 @@
           },
           "root-8": {
             "id": "root-8",
-            "label": "Belajar Berkelanjutan",
+            "label": "Mengembangkan Kemampuan Beradaptasi dengan Perubahan",
             "parentId": "root",
             "children": {
               "0": {
@@ -9007,7 +9007,7 @@
         }
       },
       "created_at": "2026-03-02T11:37:07.213Z",
-      "updated_at": "2026-03-02T12:19:35.356Z"
+      "updated_at": "2026-03-02T12:59:48.266Z"
     }
   ],
   "ai_logs": [
@@ -9070,6 +9070,106 @@
       "tokens_used": 360,
       "duration_ms": 922,
       "created_at": "2026-03-02T12:16:01.511Z"
+    },
+    {
+      "id": 1772456321546,
+      "project_id": "dde695ff-67f8-4905-a141-ba5f69e26df6",
+      "action": "generate_pillars",
+      "input": "Given the main goal: \"Memajukan Karier\", generate exactly 8 key pillars or sub-goals that comprehensively cover all aspects needed to achieve this goal. Return as JSON object with key \"pillars\" containing an array of exactly 8 strings. Example: {\"pillars\": [\"pillar1\", \"pillar2\", \"pillar3\", \"pillar4\", \"pillar5\", \"pillar6\", \"pillar7\", \"pillar8\"]}",
+      "output": "{\"pillars\": [\"Meningkatkan Kemampuan\", \"Membangun Jaringan Profesional\", \"Pengembangan Diri\", \"Pencarian Peluang Karier\", \"Pengelolaan Waktu dan Prioritas\", \"Peningkatan Keterampilan\", \"Pembangunan Personal Branding\", \"Pengelolaan Stres dan Keseimbangan Hidup\"]}",
+      "tokens_used": 277,
+      "duration_ms": 724,
+      "created_at": "2026-03-02T12:58:41.546Z"
+    },
+    {
+      "id": 1772456349695,
+      "project_id": "dde695ff-67f8-4905-a141-ba5f69e26df6",
+      "action": "breakdown",
+      "input": "Given the sub-goal: \"Jaringan Profesional\" (part of main goal: \"Memajukan Karier\"), generate exactly 8 specific, actionable steps or tasks to achieve this sub-goal. Return as JSON object with key \"actions\" containing an array of exactly 8 strings. Example: {\"actions\": [\"action1\", \"action2\", \"action3\", \"action4\", \"action5\", \"action6\", \"action7\", \"action8\"]}",
+      "output": "{\"actions\": [\"Membuat daftar kontak profesional di industri\", \"Menghadiri seminar dan konferensi terkait\", \"Mengembangkan profil di media sosial profesional\", \"Menghubungi mentor atau coach karier\", \"Membuat rencana pertemuan dengan kontak profesional\", \"Mengikuti komunitas online terkait industri\", \"Mengembangkan keterampilan untuk meningkatkan nilai di jaringan\", \"Mengatur jadwal untuk mempertahankan dan memperluas jaringan profesional\"]}",
+      "tokens_used": 313,
+      "duration_ms": 645,
+      "created_at": "2026-03-02T12:59:09.695Z"
+    },
+    {
+      "id": 1772456357682,
+      "project_id": "dde695ff-67f8-4905-a141-ba5f69e26df6",
+      "action": "generate_pillars",
+      "input": "Given the main goal: \"Memajukan Karier\", generate exactly 8 key pillars or sub-goals that comprehensively cover all aspects needed to achieve this goal. Return as JSON object with key \"pillars\" containing an array of exactly 8 strings. Example: {\"pillars\": [\"pillar1\", \"pillar2\", \"pillar3\", \"pillar4\", \"pillar5\", \"pillar6\", \"pillar7\", \"pillar8\"]}",
+      "output": "{\"pillars\": [\"Meningkatkan Kemampuan Teknis\", \"Mengembangkan Jaringan Profesional\", \"Meningkatkan Keterampilan Berkomunikasi\", \"Mengelola Waktu dan Prioritas\", \"Membangun Kepercayaan Diri\", \"Mengembangkan Keterampilan Leadership\", \"Mengikuti Perkembangan Industri\", \"Meningkatkan Keseimbangan Kehidupan Pribadi dan Profesional\"]}",
+      "tokens_used": 295,
+      "duration_ms": 855,
+      "created_at": "2026-03-02T12:59:17.682Z"
+    },
+    {
+      "id": 1772456360756,
+      "project_id": "dde695ff-67f8-4905-a141-ba5f69e26df6",
+      "action": "generate_pillars",
+      "input": "Given the main goal: \"Memajukan Karier\", generate exactly 8 key pillars or sub-goals that comprehensively cover all aspects needed to achieve this goal. Return as JSON object with key \"pillars\" containing an array of exactly 8 strings. Example: {\"pillars\": [\"pillar1\", \"pillar2\", \"pillar3\", \"pillar4\", \"pillar5\", \"pillar6\", \"pillar7\", \"pillar8\"]}",
+      "output": "{\"pillars\": [\"Meningkatkan Kemampuan Teknikal\", \"Mengembangkan Kemampuan Berpikir Kritis\", \"Membangun Jaringan Profesional\", \"Mengembangkan Kemampuan Komunikasi\", \"Meningkatkan Kemampuan Manajemen Waktu\", \"Mengembangkan Kemampuan Pemimpin\", \"Meningkatkan Kesadaran Diri dan Emosi\", \"Mengembangkan Kemampuan Beradaptasi dengan Perubahan\"]}",
+      "tokens_used": 298,
+      "duration_ms": 791,
+      "created_at": "2026-03-02T12:59:20.756Z"
+    },
+    {
+      "id": 1772456363517,
+      "project_id": "dde695ff-67f8-4905-a141-ba5f69e26df6",
+      "action": "breakdown",
+      "input": "Given the sub-goal: \"Membangun Jaringan Profesional\" (part of main goal: \"Memajukan Karier\"), generate exactly 8 specific, actionable steps or tasks to achieve this sub-goal. Return as JSON object with key \"actions\" containing an array of exactly 8 strings. Example: {\"actions\": [\"action1\", \"action2\", \"action3\", \"action4\", \"action5\", \"action6\", \"action7\", \"action8\"]}",
+      "output": "{\"actions\": [\"Menghadiri Konferensi Industri\", \"Membuat Profil Profesional di Media Sosial\", \"Menghubungi Mantan Rekan Kerja untuk Memperbarui Informasi\", \"Mengikuti Kelompok Diskusi Online\", \"Menghadiri Acara Jaringan Profesional\", \"Membuat Daftar Kontak Profesional\", \"Mengirimkan Surat Elektronik untuk Memperkenalkan Diri\", \"Mengikuti Pelatihan atau Sertifikasi untuk Meningkatkan Kemampuan\"]}",
+      "tokens_used": 321,
+      "duration_ms": 855,
+      "created_at": "2026-03-02T12:59:23.517Z"
+    },
+    {
+      "id": 1772456367618,
+      "project_id": "dde695ff-67f8-4905-a141-ba5f69e26df6",
+      "action": "make_smart",
+      "input": "Convert the following goal into a SMART goal (Specific, Measurable, Achievable, Relevant, Time-bound): \"Membangun Jaringan Profesional\". Return as JSON object with key \"smart\" containing the SMART goal string, and key \"breakdown\" as an object with keys S, M, A, R, T each containing a short explanation. Example: {\"smart\": \"...\", \"breakdown\": {\"S\": \"...\", \"M\": \"...\", \"A\": \"...\", \"R\": \"...\", \"T\": \"...\"}}",
+      "output": "{\"smart\": \"Membangun Jaringan Profesional yang terdiri dari 50 orang dalam 6 bulan ke depan dengan menghadiri minimal 2 acara networking per bulan dan melakukan follow-up dengan 10 orang baru setiap bulan\", \"breakdown\": {\"S\": \"Membangun Jaringan Profesional yang terdiri dari 50 orang\", \"M\": \"Mengukur jumlah orang dalam jaringan dan acara networking yang dihadiri\", \"A\": \"Menghadiri minimal 2 acara networking per bulan dan follow-up dengan 10 orang baru setiap bulan\", \"R\": \"Membangun jaringan profesional untuk meningkatkan kesempatan karir dan memperluas pengetahuan\", \"T\": \"6 bulan ke depan\"}}",
+      "tokens_used": 385,
+      "duration_ms": 657,
+      "created_at": "2026-03-02T12:59:27.618Z"
+    },
+    {
+      "id": 1772456394438,
+      "project_id": null,
+      "action": "generate_pillars",
+      "input": "Given the main goal: \"jadi presiden\", generate exactly 8 key pillars or sub-goals that comprehensively cover all aspects needed to achieve this goal. Return as JSON object with key \"pillars\" containing an array of exactly 8 strings. Example: {\"pillars\": [\"pillar1\", \"pillar2\", \"pillar3\", \"pillar4\", \"pillar5\", \"pillar6\", \"pillar7\", \"pillar8\"]}",
+      "output": "{\"pillars\": [\"Membangun Jaringan Politik\", \"Mengembangkan Kepemimpinan\", \"Meningkatkan Kapasitas Intelektual\", \"Membentuk Citra Publik\", \"Mengumpulkan Sumber Daya\", \"Mengembangkan Strategi Kampanye\", \"Meningkatkan Partisipasi Masyarakat\", \"Menghadapi Tantangan dan Kritik\"]}",
+      "tokens_used": 281,
+      "duration_ms": 727,
+      "created_at": "2026-03-02T12:59:54.438Z"
+    },
+    {
+      "id": 1772456399063,
+      "project_id": null,
+      "action": "breakdown",
+      "input": "Given the sub-goal: \"Meningkatkan Kapasitas Intelektual\" (part of main goal: \"jadi presiden\"), generate exactly 8 specific, actionable steps or tasks to achieve this sub-goal. Return as JSON object with key \"actions\" containing an array of exactly 8 strings. Example: {\"actions\": [\"action1\", \"action2\", \"action3\", \"action4\", \"action5\", \"action6\", \"action7\", \"action8\"]}",
+      "output": "{\"actions\": [\"Membaca buku tentang kepemimpinan dan politik\", \"Mengikuti kursus online tentang strategi dan manajemen\", \"Mengembangkan kemampuan berbicara di depan umum\", \"Mengikuti seminar dan konferensi tentang isu-isu global\", \"Membangun jaringan dengan tokoh-tokoh penting\", \"Mengasah kemampuan analitis dan kritis\", \"Mengembangkan kemampuan berpikir kreatif dan inovatif\", \"Mengikuti program magang atau pelatihan kepemimpinan\"]}",
+      "tokens_used": 332,
+      "duration_ms": 809,
+      "created_at": "2026-03-02T12:59:59.063Z"
+    },
+    {
+      "id": 1772456429670,
+      "project_id": null,
+      "action": "generate_pillars",
+      "input": "Given the main goal: \"Jadi orang sukses\", generate exactly 8 key pillars or sub-goals that comprehensively cover all aspects needed to achieve this goal. Return as JSON object with key \"pillars\" containing an array of exactly 8 strings. Example: {\"pillars\": [\"pillar1\", \"pillar2\", \"pillar3\", \"pillar4\", \"pillar5\", \"pillar6\", \"pillar7\", \"pillar8\"]}",
+      "output": "{\"pillars\": [\"Meningkatkan Kemampuan Diri\", \"Membangun Jaringan dan Relasi\", \"Mengembangkan Karir yang Stabil\", \"Mencapai Keseimbangan Hidup\", \"Meningkatkan Kesehatan Fisik dan Mental\", \"Mengelola Keuangan dengan Bijak\", \"Membangun Kesadaran dan Kepribadian\", \"Mencapai Kemandirian dan Kebahagiaan\"]}",
+      "tokens_used": 297,
+      "duration_ms": 726,
+      "created_at": "2026-03-02T13:00:29.670Z"
+    },
+    {
+      "id": 1772456462953,
+      "project_id": null,
+      "action": "breakdown",
+      "input": "Given the sub-goal: \"Jadi kaigo di jepang\" (part of main goal: \"Jadi orang sukses\"), generate exactly 8 specific, actionable steps or tasks to achieve this sub-goal. Return as JSON object with key \"actions\" containing an array of exactly 8 strings. Example: {\"actions\": [\"action1\", \"action2\", \"action3\", \"action4\", \"action5\", \"action6\", \"action7\", \"action8\"]}",
+      "output": "{\"actions\": [\"Mempelajari bahasa Jepang secara intensif\", \"Mengenal budaya dan adat istiadat Jepang\", \"Mencari informasi tentang persyaratan menjadi kaigo di Jepang\", \"Mendaftar ke kursus atau pelatihan kaigo di Jepang\", \"Mengurus dokumen dan visa yang dibutuhkan untuk bekerja di Jepang\", \"Membuat portofolio dan CV yang menarik untuk melamar pekerjaan kaigo\", \"Menghubungi agen pekerjaan atau perusahaan kaigo di Jepang untuk melamar pekerjaan\", \"Melakukan wawancara dan tes kemampuan untuk menjadi kaigo di Jepang\"]}",
+      "tokens_used": 356,
+      "duration_ms": 905,
+      "created_at": "2026-03-02T13:01:02.953Z"
     }
   ]
 }

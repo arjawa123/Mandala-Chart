@@ -1,24 +1,22 @@
 /**
- * project.service.js - CRUD using lowdb
+ * project.service.js - CRUD using PostgreSQL
  */
 
 const db = require('../db/database');
 const { v4: uuidv4 } = require('uuid');
 
 const ProjectService = {
-    getAll() {
-        return db.get('projects')
-            .map(p => ({ id: p.id, name: p.name, created_at: p.created_at, updated_at: p.updated_at }))
-            .sortBy('updated_at')
-            .reverse()
-            .value();
+    async getAll() {
+        const result = await db.query('SELECT id, name, created_at, updated_at FROM projects ORDER BY updated_at DESC');
+        return result.rows;
     },
 
-    getById(id) {
-        return db.get('projects').find({ id }).value() || null;
+    async getById(id) {
+        const result = await db.query('SELECT * FROM projects WHERE id = $1', [id]);
+        return result.rows.length ? result.rows[0] : null;
     },
 
-    create(name, data) {
+    async create(name, data) {
         const id = uuidv4();
         const now = new Date().toISOString();
         const project = {
@@ -28,25 +26,37 @@ const ProjectService = {
             created_at: now,
             updated_at: now
         };
-        db.get('projects').push(project).write();
+
+        await db.query(
+            'INSERT INTO projects (id, name, data, created_at, updated_at) VALUES ($1, $2, $3, $4, $5)',
+            [project.id, project.name, JSON.stringify(project.data), project.created_at, project.updated_at]
+        );
+
         return project;
     },
 
-    update(id, { name, data }) {
+    async update(id, { name, data }) {
         const now = new Date().toISOString();
-        const project = db.get('projects').find({ id });
-        if (!project.value()) return null;
 
-        const updates = { updated_at: now };
-        if (name !== undefined) updates.name = name;
-        if (data !== undefined) updates.data = data;
+        // Find existing project to do partial update
+        const existingResult = await db.query('SELECT name, data FROM projects WHERE id = $1', [id]);
+        if (existingResult.rows.length === 0) return null;
+        const existing = existingResult.rows[0];
 
-        project.assign(updates).write();
-        return project.value();
+        const updatedName = name !== undefined ? name : existing.name;
+        const updatedData = data !== undefined ? data : existing.data;
+
+        await db.query(
+            'UPDATE projects SET name = $1, data = $2, updated_at = $3 WHERE id = $4',
+            [updatedName, JSON.stringify(updatedData), now, id]
+        );
+
+        const result = await db.query('SELECT * FROM projects WHERE id = $1', [id]);
+        return result.rows[0];
     },
 
-    delete(id) {
-        db.get('projects').remove({ id }).write();
+    async delete(id) {
+        await db.query('DELETE FROM projects WHERE id = $1', [id]);
         return { success: true };
     }
 };

@@ -10,20 +10,19 @@ if grep -q "your_groq_api_key_here" backend/.env; then
   echo "  Get your key from: https://console.groq.com"
 fi
 
-# Start backend
-echo "[1/2] Starting backend on http://localhost:3001..."
-cd backend && npm start &
-BACKEND_PID=$!
-cd ..
-
-# Wait for backend
-sleep 2
-
 # Start frontend
-echo "[2/2] Starting frontend on http://localhost:5173..."
+echo "[1/2] Starting frontend on http://localhost:5173..."
 cd frontend && npm run dev &
 FRONTEND_PID=$!
-cd ..
+
+# Wait for frontend
+
+sleep 2
+
+# Start backend
+echo "[2/2] Starting backend on http://localhost:3001..."
+cd backend && npm start &
+BACKEND_PID=$!
 
 echo ""
 echo "App started!"

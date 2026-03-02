@@ -61,10 +61,10 @@ router.post('/make-smart', aiRateLimiter, async (req, res) => {
 });
 
 // GET /api/ai/history
-router.get('/history', (req, res) => {
+router.get('/history', async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 50;
-        const history = AIService.getHistory(limit);
+        const history = await AIService.getHistory(limit);
         res.json({ history });
     } catch (err) {
         res.status(500).json({ error: err.message });

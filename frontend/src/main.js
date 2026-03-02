@@ -47,26 +47,79 @@ document.getElementById('btn-zoom-reset').addEventListener('click', () => {
     scale = 1; panX = 0; panY = 0; applyTransform();
 });
 
-// Pan: drag on empty canvas or middle mouse
-canvasWrap.addEventListener('mousedown', (e) => {
+// Pan & Zoom: pointer/touch on canvasWrap
+
+// --- Pinch-to-zoom & Mobile Pan Logic ---
+let initialPinchDistance = null;
+let initialScale = 1;
+
+// Mencegah pull-to-refresh & browser scrolling default saat menggunakan area canvas
+canvasWrap.style.touchAction = 'none';
+
+canvasWrap.addEventListener('pointerdown', (e) => {
+    // Only handle 1 finger/pointer pan if not pinching
     const inner = document.getElementById('canvas-inner');
-    if (e.button === 1 || e.target === canvasWrap || e.target === inner) {
-        isPanning = true;
-        panStartX = e.clientX; panStartY = e.clientY;
-        panOriginX = panX; panOriginY = panY;
-        canvasWrap.style.cursor = 'grabbing';
-        e.preventDefault();
+    if ((e.pointerType === 'mouse' && e.button !== 1 && e.target !== canvasWrap && e.target !== inner) && !e.target.closest('#canvas-inner')) {
+        // if clicking a cell with mouse left click, don't pan 
+    } else if (e.target === canvasWrap || e.target === inner || e.button === 1) {
+        if (!initialPinchDistance) {
+            isPanning = true;
+            panStartX = e.clientX;
+            panStartY = e.clientY;
+            panOriginX = panX;
+            panOriginY = panY;
+            canvasWrap.style.cursor = 'grabbing';
+            canvasWrap.setPointerCapture(e.pointerId);
+        }
     }
 });
-window.addEventListener('mousemove', (e) => {
-    if (!isPanning) return;
+
+window.addEventListener('pointermove', (e) => {
+    if (!isPanning || initialPinchDistance) return;
     panX = panOriginX + (e.clientX - panStartX);
     panY = panOriginY + (e.clientY - panStartY);
     applyTransform();
 });
-window.addEventListener('mouseup', () => {
-    if (isPanning) { isPanning = false; canvasWrap.style.cursor = 'default'; }
+
+window.addEventListener('pointerup', (e) => {
+    if (isPanning) {
+        isPanning = false;
+        canvasWrap.style.cursor = 'default';
+        try { canvasWrap.releasePointerCapture(e.pointerId); } catch (ex) { }
+    }
 });
+
+// Touch native untuk fitur Pinch-to-Zoom dengan dua jari
+canvasWrap.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+        isPanning = false; // Batalkan 1-finger pan kalau sedang pinch
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        initialPinchDistance = Math.hypot(dx, dy);
+        initialScale = scale;
+    }
+}, { passive: false });
+
+canvasWrap.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2 && initialPinchDistance) {
+        e.preventDefault(); // Mencegah scrolling browser (Safari/Chrome Mobile)
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const currentDistance = Math.hypot(dx, dy);
+
+        let newScale = initialScale * (currentDistance / initialPinchDistance);
+        // Batas zoom: terkecil 0.15 (zoom out), paling besar 3x
+        scale = Math.min(Math.max(0.15, newScale), 3);
+        applyTransform();
+    }
+}, { passive: false });
+
+canvasWrap.addEventListener('touchend', (e) => {
+    if (e.touches.length < 2) {
+        initialPinchDistance = null;
+    }
+});
+
 canvasWrap.addEventListener('wheel', (e) => {
     e.preventDefault();
     zoomBy(e.deltaY < 0 ? 0.08 : -0.08);
@@ -295,40 +348,42 @@ document.getElementById('template-modal-close').addEventListener('click', () => 
 const aiPanel = document.getElementById('ai-panel');
 const btnAiToggle = document.getElementById('btn-ai-toggle');
 
-// Dragging Logic for Mobile Bottom Sheet
+// Dragging Logic for Mobile Bottom Sheet (Menggunakan transform Y agar 60fps)
 let startY = 0;
-let startHeight = 0;
 let isDragging = false;
+let currentTranslateY = 0;
+let panelHeight = 0;
 
 // Determine if we are on a mobile sized screen
 const isMobile = () => window.innerWidth <= 768;
 
 aiPanel.addEventListener('pointerdown', (e) => {
-    // Only drag from the header/drag handle in mobile
     if (!isMobile() || !e.target.closest('.ai-panel-header')) return;
     isDragging = true;
     startY = e.clientY;
-    startHeight = aiPanel.offsetHeight;
+    panelHeight = aiPanel.offsetHeight;
 
-    aiPanel.classList.remove('transitioning');
+    const style = window.getComputedStyle(aiPanel);
+    const matrix = new WebKitCSSMatrix(style.transform);
+    currentTranslateY = matrix.m41 ? matrix.m42 : 0;
+
+    // Matikan transisi native CSS untuk drag GPU realtime
+    aiPanel.style.transition = 'none';
     aiPanel.setPointerCapture(e.pointerId);
 });
 
 aiPanel.addEventListener('pointermove', (e) => {
     if (!isDragging) return;
+    e.preventDefault(); // cegah native scrolling
 
-    // Calculate new height (inverse of Y movement because bottom is fixed)
     const dy = e.clientY - startY;
-    let newHeight = startHeight - dy;
+    let targetY = currentTranslateY + dy;
 
-    // Limits
-    const minHeight = 60; // Just header
-    const maxHeight = window.innerHeight * 0.9;
+    // Cegah drag sampai lepas / terbang ke atas layar, mentok ujung atas (0)
+    if (targetY < 0) targetY = 0;
 
-    if (newHeight < minHeight) newHeight = minHeight;
-    if (newHeight > maxHeight) newHeight = maxHeight;
-
-    aiPanel.style.setProperty('--panel-height', `${newHeight}px`);
+    // Gunakan transform GPU rendering agar pergerakan sehalus mentega
+    aiPanel.style.transform = `translateY(${targetY}px)`;
 });
 
 aiPanel.addEventListener('pointerup', (e) => {
@@ -336,42 +391,36 @@ aiPanel.addEventListener('pointerup', (e) => {
     isDragging = false;
     aiPanel.releasePointerCapture(e.pointerId);
 
-    const currentHeight = aiPanel.offsetHeight;
-    const threshClose = 120; // threshold to strictly close
+    // Kembalikan transisi native CSS
+    aiPanel.style.transition = 'transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
 
-    aiPanel.classList.add('transitioning');
+    const style = window.getComputedStyle(aiPanel);
+    const matrix = new WebKitCSSMatrix(style.transform);
+    const finalY = matrix.m41 ? matrix.m42 : 0;
 
-    if (currentHeight < threshClose) {
-        // Snap to closed/collapsed
+    // Jika ditarik ke bawah lebih dari seperempat, kita drop / sembunyikan secara utuh
+    if (finalY > panelHeight * 0.25) {
         isAiPanelOpen = false;
         aiPanel.classList.add('collapsed');
         btnAiToggle.classList.remove('active');
-        // Reset height property so CSS handles the collapsed state correctly
-        aiPanel.style.removeProperty('--panel-height');
     } else {
-        // Stay open, ensure height is locked
+        // Balikkan seperti dibuka penuh
         isAiPanelOpen = true;
         aiPanel.classList.remove('collapsed');
         btnAiToggle.classList.add('active');
     }
 
-    // Remove transition class after animation completes to avoid conflict with further dragging
-    setTimeout(() => aiPanel.classList.remove('transitioning'), 300);
+    // Hapus inline transform styling agar sistem class CSS ambil alih lagi
+    setTimeout(() => {
+        aiPanel.style.transform = '';
+        aiPanel.style.transition = '';
+    }, 10);
 });
 
 btnAiToggle.addEventListener('click', () => {
-    aiPanel.classList.add('transitioning');
     isAiPanelOpen = !isAiPanelOpen;
     aiPanel.classList.toggle('collapsed', !isAiPanelOpen);
     btnAiToggle.classList.toggle('active', isAiPanelOpen);
-
-    if (isAiPanelOpen && isMobile()) {
-        aiPanel.style.setProperty('--panel-height', '400px'); // Default height when opened via button
-    } else {
-        aiPanel.style.removeProperty('--panel-height');
-    }
-
-    setTimeout(() => aiPanel.classList.remove('transitioning'), 300);
 });
 btnAiToggle.classList.add('active');
 

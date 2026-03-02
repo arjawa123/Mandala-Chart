@@ -1095,11 +1095,8 @@ body {
     left: 0;
     right: 0;
     width: 100%;
-    /* Default height controlled via JS/inline variable, fallback to 70vh */
-    height: var(--panel-height, 400px);
-    max-height: 90vh;
-    min-height: 60px;
-    /* enough for drag handle + title */
+    height: 80vh;
+    /* Fixed height! */
     transform: translateY(100%);
     border-left: none;
     border-top: 1px solid var(--border);
@@ -1108,6 +1105,8 @@ body {
     z-index: 100;
     /* transition mostly strictly handled by JS during drag, but add fallback for toggle */
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+    touch-action: none;
   }
 
   /* Add drag handle indicating it can be pulled */
@@ -1128,6 +1127,7 @@ body {
   .ai-panel-header {
     padding-top: 24px;
     cursor: grab;
+    touch-action: none;
   }
 
   .ai-panel-header:active {
@@ -1135,7 +1135,7 @@ body {
   }
 
   #ai-panel.transitioning {
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   #ai-panel:not(.collapsed) {

@@ -62,6 +62,23 @@ function createDefaultState(name = 'Untitled') {
 export class MandalaState {
     constructor(initialState = null) {
         this._state = initialState || createDefaultState();
+        this._relinkReferences();
+    }
+
+    _relinkReferences() {
+        if (!this._state || !this._state.cells) return;
+        const cells = this._state.cells;
+        for (const key in cells) {
+            const cell = cells[key];
+            if (cell.children) {
+                for (const pos in cell.children) {
+                    const childId = cell.children[pos]?.id;
+                    if (childId && cells[childId]) {
+                        cell.children[pos] = cells[childId];
+                    }
+                }
+            }
+        }
     }
 
     getState() {
@@ -70,6 +87,7 @@ export class MandalaState {
 
     setState(newState) {
         this._state = newState;
+        this._relinkReferences();
     }
 
     // Deep clone state
@@ -224,6 +242,7 @@ export class MandalaState {
         this._state = { ...fresh, id: this._state.id };
         this._state.navStack = ['root'];
         this._state.currentView = 'root';
+        this._relinkReferences();
     }
 }
 
